@@ -1,18 +1,34 @@
 import './App.css';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { useState } from 'react';
 
 
 function App() {
+  const [counter, setCounter] = useState(0);
+
+  const handleIncrement = () => {
+    setCounter(counter + 1);
+  }
+
+  const handleDecrement = () => {
+    if (counter > 0)
+      setCounter(counter - 1);
+  }
+
+  const resetCounter = () => {
+    setCounter(0);
+  }
+
   return (
     <div className='flex flex-col justify-center items-center min-h-screen bg-cover bg-center' style={{ backgroundImage: `url('/background.png')` }}>
       <div className='bg-[#FAF9FA] rounded-2xl p-10 max-w-md'>
         <div className='h-[400px] rounded-3xl mt-2 relative' style={{
           backgroundImage: `linear-gradient(to right, rgba(253, 230, 90, 100%), rgba(204, 254, 87, 100%))`,
         }}>
-          <div className='absolute right-0 mt-[-2rem]'>
+          <div className='absolute right-0 mt-[-2rem] hover:cursor-pointer'>
             <svg
-              // onClick={}
+              onClick={resetCounter}
               xmlns="http://www.w3.org/2000/svg"
               id="Outline"
               viewBox="0 0 24 24"
@@ -23,7 +39,7 @@ function App() {
             </svg>
           </div>
           <div className='text-center pt-40'>
-            <h3 className='text-6xl font-extrabold'>Hello</h3>
+            <h3 className='text-6xl font-extrabold'>{counter}</h3>
           </div>
         </div>
         <form>
@@ -31,12 +47,16 @@ function App() {
             <Stack spacing={2} direction="row">
               <Button
                 variant='contained'
-                className='bg-[#F2F2F2] text-black font-semibold text-2xl w-[200px] h-[75px]'>
+                className='bg-[#F2F2F2] text-black font-semibold text-2xl w-[200px] h-[75px]'
+                onClick={handleDecrement}
+              >
                 -
               </Button>
               <Button
                 className='bg-[#F2F2F2] text-black font-semibold text-2xl w-[200px] h-[75px]'
-                variant='contained'>
+                variant='contained'
+                onClick={handleIncrement}
+              >
                 +
               </Button>
             </Stack>
